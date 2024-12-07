@@ -174,7 +174,7 @@ Working flow:
     -   save the newBook to db (https://mongoosejs.com/docs/documents.html)
     -   res.statusCode.send() / res.statusCode.json()
 
-**res.send()** vs **res.json()**
+### res.send() vs res.json()
 
 **res.send()** - The res.send() function is used for sending the response for the HTTP request. It takes a parameter body. The parameter can be a String, Buffer object, an object, Boolean, or an Array.
 
@@ -201,13 +201,14 @@ Content Type: Its content-type is set to - "application/json".
 
 Returns: It is used to send JSON response to the client and then ends the response process.
 
--   Inorder to maintain MVC structure, moving the route async function into controller
+Inorder to maintain MVC structure, moving the route async function into controller
+
 -   Methods of mongoose (https://mongoosejs.com/docs/queries.html)
 
-*   After creating the controller, in the frontend we fetch the bookData from json file and we need to fetch from API using Redux toolkit inorder to be dynamic.
-    [Redux vs Redux toolkit](https://30dayscoding.com/blog/redux-vs-redux-toolkit)
+After creating the controller, in the frontend we fetch the bookData from json file and we need to fetch from API using Redux toolkit inorder to be dynamic.
+[Redux vs Redux toolkit](https://30dayscoding.com/blog/redux-vs-redux-toolkit)
 
-## Redux toolkit[https://redux-toolkit.js.org/introduction/getting-started]
+## [Redux toolkit](https://redux-toolkit.js.org/introduction/getting-started)
 
 [RTK Query](https://redux-toolkit.js.org/rtk-query/overview)
 
