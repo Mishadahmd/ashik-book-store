@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { useCreateOrderMutation } from "../../redux/features/orders/ordersApi";
+import Swal from "sweetalert2";
 
 const CheckoutPage = () => {
     const cartItems = useSelector((state) => state.cart.cartItems);
@@ -10,7 +13,8 @@ const CheckoutPage = () => {
         .reduce((acc, item) => acc + item.newPrice, 0)
         .toFixed(2);
 
-    const currentUser = true; // TODO: get user from auth
+    const { currentUser } = useAuth();
+    const navigate = useNavigate();
 
     const {
         register,
@@ -20,25 +24,58 @@ const CheckoutPage = () => {
     } = useForm();
 
     const [isChecked, setIsChecked] = useState(false);
+    const [createOrder, { isLoading, error }] = useCreateOrderMutation();
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         console.log(data);
 
         const newOrder = {
             name: data.name,
             email: currentUser?.email,
             address: {
-                address: data.address,
+                street: data.address,
                 city: data.city,
                 country: data.country,
                 state: data.state,
+                zipcode: data.zipcode,
             },
             phone: data.phone,
             productIds: cartItems.map((item) => item?._id),
             totalPrice: totalPrice,
         };
-        console.log(newOrder);
+        // console.log(newOrder);
+        try {
+            const result = await Swal.fire({
+                title: "Confirm Order?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, place the order!",
+            });
+
+            if (result.isConfirmed) {
+                await createOrder(newOrder).unwrap();
+                Swal.fire(
+                    "Order Placed!",
+                    "Your order has been placed successfully.",
+                    "success"
+                );
+                navigate("/orders");
+            } else {
+                Swal.fire(
+                    "Order Cancelled",
+                    "Your order has not been placed.",
+                    "error"
+                );
+            }
+        } catch (error) {
+            console.error("Error in placing order", error);
+            alert("Failed to place an order", error);
+        }
     };
+
+    if (isLoading) return <div>Loading....</div>;
 
     return (
         <section>
@@ -77,7 +114,10 @@ const CheckoutPage = () => {
                                                 Full Name
                                             </label>
                                             <input
-                                                {...register("name")}
+                                                {...register("name", {
+                                                    required:
+                                                        "Name is required",
+                                                })}
                                                 type="text"
                                                 name="name"
                                                 className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
@@ -104,7 +144,10 @@ const CheckoutPage = () => {
                                                 Phone Number
                                             </label>
                                             <input
-                                                {...register("phone")}
+                                                {...register("phone", {
+                                                    required:
+                                                        "Phone Number required",
+                                                })}
                                                 type="number"
                                                 name="phone"
                                                 className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
@@ -128,7 +171,10 @@ const CheckoutPage = () => {
                                         <div className="md:col-span-2">
                                             <label htmlFor="city">City</label>
                                             <input
-                                                {...register("city")}
+                                                {...register("city", {
+                                                    required:
+                                                        "City is required",
+                                                })}
                                                 type="text"
                                                 name="city"
                                                 className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"

@@ -9,6 +9,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { HiOutlineHeart } from "react-icons/hi";
 import avatarImg from "../assets/avatar.png";
 import { useSelector } from "react-redux";
+import { useAuth } from "../context/AuthContext";
 
 const navigation = [
     { name: "Dashboard", href: "/dashboard" },
@@ -24,7 +25,11 @@ const Navbar = () => {
     const cartItems = useSelector((state) => state.cart.cartItems);
     // console.log(cartItems.length);
 
-    const currentUser = true;
+    const { currentUser, logout } = useAuth();
+
+    const handleLogout = () => {
+        logout();
+    };
     return (
         <header className="max-w-screen-2xl mx-auto px-4 py-6">
             <nav className="flex justify-between items-center">
@@ -80,6 +85,14 @@ const Navbar = () => {
                                                     </Link>
                                                 </li>
                                             ))}
+                                            <li>
+                                                <button
+                                                    className="block px-4 py-2 w-full text-left text-sm hover:bg-gray-100"
+                                                    onClick={handleLogout}
+                                                >
+                                                    Logout
+                                                </button>
+                                            </li>
                                         </ul>
                                     </div>
                                 )}
