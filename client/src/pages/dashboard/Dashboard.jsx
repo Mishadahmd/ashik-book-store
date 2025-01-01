@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import getBasicUrl from "../../utils/getBasicUrl";
+import getBasicUrl from "../../utils/getBasicURL";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading";

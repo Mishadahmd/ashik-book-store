@@ -14,7 +14,7 @@ import DashboardLayout from "../pages/dashboard/DashboardLayout";
 import Dashboard from "../pages/dashboard/Dashboard";
 import { ManageBooks } from "../pages/dashboard/manageBooks/ManageBooks";
 import { AddBook } from "../pages/dashboard/addBook/AddBook";
-import UpdateBook from "../pages/dashboard/EditBook/UpdateBook";
+import UpdateBook from "../pages/dashboard/EditBook/updateBook";
 
 const router = createBrowserRouter([
     {
