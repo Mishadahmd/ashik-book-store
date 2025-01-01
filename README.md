@@ -1056,3 +1056,14 @@ npm i react-chartjs-2 chart.js
 
 [Chart JS 2](https://www.npmjs.com/package/react-chartjs-2)
 [Chart.JS](https://www.chartjs.org/docs/latest/)
+
+---
+
+## Hosting
+
+[Vercel](https://vercel.com/docs/frameworks/vite)
+
+-   Add new Project
+
+-   In vercel, put the frontend folder there and allow cors configuration for the created website
+-   also firebase -> authorized domain as well
