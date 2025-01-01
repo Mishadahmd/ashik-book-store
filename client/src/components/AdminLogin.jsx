@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import getBasicUrl from "../utils/getBasicUrl";
+import getBasicUrl from "../utils/getBasicURL";
 
 const AdminLogin = () => {
     const [message, setMessage] = useState("");
