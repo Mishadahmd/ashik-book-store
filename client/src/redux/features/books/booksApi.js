@@ -1,4 +1,4 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import getBasicUrl from "../../../utils/getBasicUrl";
 
 const baseQuery = fetchBaseQuery({
@@ -24,7 +24,7 @@ const booksApi = createApi({
         }),
         fetchBookById: builder.query({
             query: (id) => `/${id}`,
-            providesTags: (result, error, id) => [{type: "Books", id}],
+            providesTags: (result, error, id) => [{ type: "Books", id }],
         }),
         addBook: builder.mutation({
             query: (newBook) => ({
@@ -35,7 +35,7 @@ const booksApi = createApi({
             invalidatesTags: ["Books"],
         }),
         updateBook: builder.mutation({
-            query: ({id, ...rest}) => ({
+            query: ({ id, ...rest }) => ({
                 url: `/edit/${id}`,
                 method: "PUT",
                 body: rest,
@@ -52,7 +52,6 @@ const booksApi = createApi({
             }),
             invalidatesTags: ["Books"],
         }),
-
     }),
 });
 
