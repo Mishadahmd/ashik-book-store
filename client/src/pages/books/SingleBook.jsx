@@ -2,7 +2,7 @@ import React from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import { useFetchBookByIdQuery } from "../../redux/features/books/booksApi";
 import { useParams } from "react-router-dom";
-import { getImageUrl } from "../../utils/getImgUrl";
+import { getImageUrl } from "../../utils/getImgURL";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/features/cart/cartSlice";
 
